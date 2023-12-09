@@ -14,6 +14,7 @@ public class Activity_PostulanteRegistro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postulante_registro);
+
         EditText edtDni = findViewById(R.id.dni);
         EditText edtApellidoMaterno = findViewById(R.id.editTextApellidoMaterno);
         EditText edtNombres = findViewById(R.id.editTextNombres);
@@ -34,13 +35,28 @@ public class Activity_PostulanteRegistro extends AppCompatActivity {
 
                 // Crea un nuevo postulante
                 Postulante postulante = new Postulante(dni, apellidoMaterno, nombres, fechaNacimiento, colegio, carrera);
+
+                // Convierte el postulante a una cadena (aquí necesitarás implementar tu propio método para hacer esto)
+                String postulanteString = postulanteToString(postulante);
+
+                // Escribe la cadena en un archivo
+                FileHelper fileHelper = new FileHelper(Activity_PostulanteRegistro.this);
+                fileHelper.writeToFile("postulante.txt", postulanteString);
+
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("postulante", postulante);
 
                 setResult(RESULT_OK, resultIntent);
                 finish();
-
             }
         });
+    }
+    public String postulanteToString(Postulante postulante) {
+        return postulante.getDni() + "," +
+                postulante.getApellidoMaterno() + "," +
+                postulante.getNombres() + "," +
+                postulante.getFechaNacimiento() + "," +
+                postulante.getColegio() + "," +
+                postulante.getCarrera() + "\n";
     }
 }
