@@ -27,9 +27,10 @@ public class PostulanteAdapter extends RecyclerView.Adapter<PostulanteAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // Configura los TextViews con los datos del postulante
         Postulante postulante = postulantes.get(position);
         holder.textViewDni.setText("DNI: " + postulante.getDni());
-        // Configura los otros TextViews con los datos del postulante
+
     }
 
     @Override
@@ -39,12 +40,13 @@ public class PostulanteAdapter extends RecyclerView.Adapter<PostulanteAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewDni;
-        // Agrega otros TextViews para los otros campos
+        // TextViews para los campos
 
         public ViewHolder(@NonNull View itemView) {
             super(Objects.requireNonNull(itemView));
+            // Inicializa el TextViews
             textViewDni = itemView.findViewById(R.id.textViewDni);
-            // Inicializa otros TextViews
+
         }
     }
     public void setPostulantes(List<Postulante> postulantes) {
